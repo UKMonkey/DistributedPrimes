@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DistributedSharedInterfaces.Jobs;
 
 namespace ExampleShared
@@ -10,7 +7,7 @@ namespace ExampleShared
     {
         public long NumberToProcess { get; private set; }
 
-        public String SupportingDataMd5 { get; set; }
+        public long SupportingDataVersion { get; set; }
         public String DllName { get; set; }
         public long JobId { get; set; }
         public byte[] Data

@@ -13,6 +13,7 @@ namespace ExampleServerDll
         public long StartValue { get; private set;}
         public long EndValue { get; private set;}
         public long GroupId { get; set; }
+        public long SupportingDataVersion { get; set; }
 
         public int JobCount { get { return (int) (EndValue - StartValue); } }
 
