@@ -1,16 +1,14 @@
 ﻿using System;
 using DistributedClientInterfaces.Interfaces;
 using DistributedSharedInterfaces.Jobs;
+using System.Collections.Generic;
 
 namespace ExampleClientDll
 {
     public class DataWorker : MarshalByRefObject, IDllApi
     {
         private IClientApi _client;
-
-        public byte[] SupportingData
-        { get; set; }
-
+        public Dictionary<string, byte[]> SupportingData { get; set; }
 
         public void OnDllLoaded(IClientApi client)
         {

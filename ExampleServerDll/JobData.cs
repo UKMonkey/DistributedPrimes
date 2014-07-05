@@ -7,9 +7,6 @@ namespace ExampleShared
     {
         public long NumberToProcess { get; private set; }
 
-        public long SupportingDataVersion { get; set; }
-        public String DllName { get; set; }
-        public long JobId { get; set; }
         public byte[] Data
         {
             get

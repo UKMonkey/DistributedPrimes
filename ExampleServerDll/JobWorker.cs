@@ -1,39 +1,27 @@
 ﻿using System;
 using DistributedServerInterfaces.Interfaces;
 using DistributedSharedInterfaces.Jobs;
+using System.Collections.Generic;
 
 namespace ExampleServerDll
 {
     public class JobWorker : MarshalByRefObject, IDllApi
     {
-        public event DllApiCallback SupportingDataChanged;
+        public event DataChangedCallback StatusDataChanged;
+        public event DataChangedCallback SupportingDataChanged;
 
         private IServerApi _server;
-
-        private byte[] _supportingData = new byte[0];
         private long _count = 0;
 
 
-        public byte[] SupportingData { get { return _supportingData; } }
-        public byte[] StatusData
-        {
-            get { return BitConverter.GetBytes(_count); }
-            set { _count = BitConverter.ToInt64(value, 0); }
-        }
-
-        
-        private class JobData : IJobData
-        {
-            public string DllName { get; set; }
-            public long JobId { get; set; }
-            public byte[] Data { get; set; } 
-            public long SupportingDataVersion { get; set; }
-        }
+        private const String CountKey = "CurrentCount";
 
 
-        public void OnDllLoaded(IServerApi server)
+        public void OnDllLoaded(IServerApi server, Dictionary<String, byte[]> supportingData, Dictionary<String, byte[]> status)
         {
             _server = server;
+            if (status.ContainsKey(CountKey))
+                _count = BitConverter.ToInt64(status[CountKey], 0);
         }
 
 
@@ -41,6 +29,9 @@ namespace ExampleServerDll
         {
             IJobGroup ret = new JobGroup(_count, _count + jobCount);
             _count += jobCount;
+
+            StatusDataChanged(CountKey, BitConverter.GetBytes(_count));
+
             return ret;
         }
 
@@ -48,7 +39,7 @@ namespace ExampleServerDll
         public void DataProvided(IJobResultData request)
         {
             var result = BitConverter.ToInt64(request.Data, 0);
-            Console.WriteLine("Got result for job {0}: {1}", request.JobId, result);
+            Console.WriteLine("Got result for job: {0}", result);
         }
 
 

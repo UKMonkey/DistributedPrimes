@@ -34,10 +34,12 @@
     <Reference Include="DistributedServerInterfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Debug\DistributedServerInterfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DistributedSharedInterfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Debug\DistributedSharedInterfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
