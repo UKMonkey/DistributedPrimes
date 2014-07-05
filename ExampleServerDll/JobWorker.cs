@@ -31,6 +31,7 @@ namespace ExampleServerDll
             _count += jobCount;
 
             StatusDataChanged(CountKey, BitConverter.GetBytes(_count));
+            Console.WriteLine("Processing up to number #" + jobCount);
 
             return ret;
         }
