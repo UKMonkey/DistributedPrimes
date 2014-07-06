@@ -21,7 +21,10 @@ namespace ExampleServerDll
         {
             _server = server;
             if (status.ContainsKey(CountKey))
+            {
                 _count = BitConverter.ToInt64(status[CountKey], 0);
+                Console.WriteLine("Resuming processing with count = " + _count);
+            }
         }
 
 
@@ -31,7 +34,7 @@ namespace ExampleServerDll
             _count += jobCount;
 
             StatusDataChanged(CountKey, BitConverter.GetBytes(_count));
-            Console.WriteLine("Processing up to number #" + jobCount);
+            Console.WriteLine("Processing up to number #" + _count);
 
             return ret;
         }
